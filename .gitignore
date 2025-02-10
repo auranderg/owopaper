@@ -221,3 +221,5 @@ $RECYCLE.BIN/
 # Debugging and testing files
 image.jpg
 json.json
+
+# pipenv
