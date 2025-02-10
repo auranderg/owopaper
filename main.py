@@ -16,10 +16,15 @@ ROOT = Tk()
 FRAME = ttk.Frame(ROOT, padding = 10)
 FRAME.grid()
 ttk.Label(FRAME, text="owopaper by Auran").grid(column = 0, row = 0)
-ttk.Button(FRAME, text="Run", command=ROOT.destroy).grid(column = 0, row = 1)
+TAGS = tkinter.StringVar()
+TEXT = ttk.Entry(ROOT, textvariable = TAGS)
+TEXT.grid(column = 0, row = 1)
+TEXT.insert(0, "16:9 -animated order:score ")
+
+ttk.Button(FRAME, text="Run", command=ROOT.destroy).grid(column = 0, row = 2)
 ROOT.mainloop()
 
-# will soon create a window to configure username, api key, and tags
+# will soon configure username, api key
 
 USER = "ZinnoSinno"
 API = "TBaR8JBdkwacWaxEVzugDGkC"
@@ -40,11 +45,19 @@ def AT(HOUR, MINUTE):
 '''
 
 while True:
-    time.sleep(5)
-    IMAGE = random.randint(1,100)
     PAGE = random.randint(1,50)
-    URL = f"https://e621.net/posts.json?page={PAGE}&limit=100&tags=16%3A9+-animated+order%3Ascore"
+    URL = f"https://e621.net/posts.json?page={PAGE}&limit=100&tags={TAGS.get()}"
     REQUEST = requests.get(URL, headers=HEADER).json()
+    COUNT = len(REQUEST['posts'])
+    IMAGE = random.randint(1,COUNT)
+    print(f"Limit: 100")
+    print(f"Page number: {PAGE}")
+    print(f"Post count: {COUNT}")
+    print(f"Image index: {IMAGE}")
+    print(f"Tags: {TAGS.get()}")
+
     BGURL = str(REQUEST['posts'][IMAGE]['file']['url'])
     urllib.request.urlretrieve(BGURL, "image.jpg")
     ctypes.windll.user32.SystemParametersInfoW(20, 0, os.path.abspath(os.path.dirname(sys.argv[0])) + "\image.jpg", 0)
+
+    time.sleep(5)
