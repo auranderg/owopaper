@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "*"
+pystray = "*"
 
 [dev-packages]
 

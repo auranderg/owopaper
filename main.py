@@ -7,6 +7,19 @@ import sys
 import datetime
 import time
 import random
+import pystray
+import tkinter
+from tkinter import *
+from tkinter import ttk
+
+ROOT = Tk()
+FRAME = ttk.Frame(ROOT, padding = 10)
+FRAME.grid()
+ttk.Label(FRAME, text="owopaper by Auran").grid(column = 0, row = 0)
+ttk.Button(FRAME, text="Run", command=ROOT.destroy).grid(column = 0, row = 1)
+ROOT.mainloop()
+
+# will soon create a window to configure username, api key, and tags
 
 USER = "ZinnoSinno"
 API = "TBaR8JBdkwacWaxEVzugDGkC"
@@ -25,6 +38,7 @@ def AT(HOUR, MINUTE):
             break
         time.sleep(1)
 '''
+
 while True:
     time.sleep(5)
     IMAGE = random.randint(1,100)
